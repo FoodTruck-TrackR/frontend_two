@@ -5,16 +5,14 @@ import HeroSection from '../HeroSection';
 import Footer from '../Footer';
 // import Form from './Form.js';
 
-
 function Home() {
-  return (
-    <>
-      <HeroSection />
-      <Cards />
-      <Footer />
-    </>
-  );
+	return (
+		<>
+			<HeroSection />
+			<Cards />
+			<Footer />
+		</>
+	);
 }
-      
 
 export default Home;

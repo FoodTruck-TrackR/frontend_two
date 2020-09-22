@@ -6,7 +6,7 @@ import './HeroSection.css';
 function HeroSection() {
   return (
     <div className='hero-container'>
-      <video src='./videos/production.mp4' autoPlay loop muted />
+      <video src='./videos/video-3.mp4' autoPlay loop muted />
       <h1>Food Trucks are Out There!!!</h1>
       <p>What are you waiting for?</p>
       <div className='hero-btns'>
@@ -17,14 +17,8 @@ function HeroSection() {
         >
           Sign Up/Log in
         </Button>
-        <Button
-          className='btns'
-          buttonStyle='btn--primary'
-          buttonSize='btn--large'
-          onClick={console.log('hey')}
-        >
-          VENDORS<i className='far fa-play-circle' />
-        </Button>
+       
+    
       </div>
     </div>
   );

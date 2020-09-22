@@ -19,12 +19,12 @@
 }
 
 .navbar-logo {
-  color: #fff;
+  color: rgb(15, 163, 27);
   justify-self: start;
   margin-left: 20px;
   cursor: pointer;
   text-decoration: none;
-  font-size: 2rem;
+  font-size: 1.5rem;
   display: flex;
   align-items: center;
 }
@@ -50,7 +50,7 @@
 }
 
 .nav-links {
-  color: #fff;
+  color: rgb(250, 12, 12);
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -64,7 +64,7 @@
 }
 
 .fa-bars {
-  color: #fff;
+  color: rgb(49, 233, 12);
 }
 
 .nav-links-mobile {
@@ -93,7 +93,7 @@
   }
 
   .nav-menu.active {
-    background: #242222;
+    background: #0c0c0c;
     left: 0;
     opacity: 1;
     transition: all 0.5s ease;

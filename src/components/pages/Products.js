@@ -1,6 +1,11 @@
-import React from 'react';
-import '../../App.css';
+import React from "react";
 
-export default function Products() {
-  return <h1 className='products'>PRODUCTS</h1>;
+function Welcome() {
+  return (
+    <div>
+      <h3>Hello and welcome</h3>
+    </div>
+  );
 }
+
+export default Welcome;
