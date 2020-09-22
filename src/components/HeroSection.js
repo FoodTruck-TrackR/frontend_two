@@ -6,8 +6,8 @@ import './HeroSection.css';
 function HeroSection() {
   return (
     <div className='hero-container'>
-      <video src='./videos/Pexels Videos 1238406.mp4' autoPlay loop />
-      <h1>Theres A food Truck Near You</h1>
+      <video src='./videos/production.mp4' autoPlay loop muted />
+      <h1>Food Trucks are Out There!!!</h1>
       <p>What are you waiting for?</p>
       <div className='hero-btns'>
         <Button
@@ -15,7 +15,7 @@ function HeroSection() {
           buttonStyle='btn--outline'
           buttonSize='btn--large'
         >
-          GET STARTED
+          Sign Up/Log in
         </Button>
         <Button
           className='btns'
@@ -23,7 +23,7 @@ function HeroSection() {
           buttonSize='btn--large'
           onClick={console.log('hey')}
         >
-          vendor sign up <i className='far fa-play-circle' />
+          VENDORS<i className='far fa-play-circle' />
         </Button>
       </div>
     </div>
