@@ -1,6 +1,3 @@
-
-
-
 import React from "react";
 
 function FormField({ name, label, ...rest }) {

@@ -1,7 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import FormField from "./SignUp";
+import FormField from "./FormField";
 
 //setting the initial values
 const initialValues = {
@@ -53,16 +53,12 @@ function Form({ onSubmit }) {
 
   //use formik.getFieldProps for input fields
   const nameProps = formik.getFieldProps("name");
+  const ageProps = formik.getFieldProps("age");
   const emailProps = formik.getFieldProps("email");
   const passwordProps = formik.getFieldProps("password");
   const confirmPasswordProps = formik.getFieldProps("confirmPassword");
 
-  /**
-   * getFieldProps is a way to reduce boilerplate (repetitive) code.
-   * It returns helper methods like `onChange`, `onBlur`, `value`, `name`.
-   *
-   * @see Formik https://jaredpalmer.com/formik/docs/tutorial#getfieldprops
-   */
+  
   return (
     <form onSubmit={formik.handleSubmit}>
       <FormField
@@ -74,7 +70,15 @@ function Form({ onSubmit }) {
       {formik.touched.name && formik.errors.name ? (
         <div>{formik.errors.name}</div>
       ) : null}
-     
+      <FormField
+        label="Age"
+        type="number"
+        {...ageProps}
+        placeholder="Please Enter your age"
+      />
+      {formik.touched.age && formik.errors.age ? (
+        <div>{formik.errors.age}</div>
+      ) : null}
       <FormField
         label="Email"
         type="email"
