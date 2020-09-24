@@ -5,44 +5,41 @@ import FormField from "./FormField";
 
 //setting the initial values
 const initialValues = {
-  name: "",
-  age: "",
-  email: "",
+  userName: "",
   password: "",
-  confirmPassword: ""
+  email: "",
+  role: "",
+
+  
 };
 
 //creating the validation schema
 const validationSchema = yup.object().shape({
-  name: yup
+  userName: yup
     .string()
-    .required("A name is required")
-    .min(2, "Name must be at least 2 characters"),
-  age: yup
-    .number()
-    .required("Please supply your age")
-    .min(18, "You must be at least 18 years")
-    .max(60, "You must be at most 60 years"),
-  email: yup
+    .required("A username is required")
+    .min(2, "Name must be at least 4 characters"),
+  password: yup
+    .string()
+    .required("Please supply your password"),
+    
+    email: yup
     .string()
     .email()
     .required("Email is a required field"),
-  password: yup
-    .string()
-    .required("Please enter your password")
-    .matches(
-      /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-      "Password must contain at least 8 characters, one uppercase, one number and one special case character"
-    ),
-  confirmPassword: yup
-    .string()
-    .required("Please confirm your password")
-    .when("password", {
-      is: password => (password && password.length > 0 ? true : false),
-      then: yup.string().oneOf([yup.ref("password")], "Password doesn't match")
-    })
-});
-
+    confirmPassword: yup
+      .string()
+      .required("Please confirm your password")
+      .when("password", {
+        is: password => (password && password.length > 0 ? true : false),
+        then: yup.string().oneOf([yup.ref("password")], "Password doesn't match")
+      }),
+  role: yup
+  .string()
+    .required("Diner or Vendor")
+  }
+)
+    
 function Form({ onSubmit }) {
   //using useFormik
   const formik = useFormik({
@@ -50,49 +47,49 @@ function Form({ onSubmit }) {
     validationSchema,
     onSubmit
   });
-
+  
   //use formik.getFieldProps for input fields
-  const nameProps = formik.getFieldProps("name");
-  const ageProps = formik.getFieldProps("age");
+  const userNameProps = formik.getFieldProps("userName");
+  // const passwordProps = formik.getFieldProps("password");
   const emailProps = formik.getFieldProps("email");
-  const passwordProps = formik.getFieldProps("password");
+  // const roleProps = formik.getFieldProps("role");
   const confirmPasswordProps = formik.getFieldProps("confirmPassword");
 
   
   return (
     <form onSubmit={formik.handleSubmit}>
       <FormField
-        label="Name"
+        label="UserName"
         type="text"
-        placeholder="Please Enter your name"
-        {...nameProps}
+        placeholder="Please choose your user name"
+        {...userNameProps}
       />
-      {formik.touched.name && formik.errors.name ? (
-        <div>{formik.errors.name}</div>
-      ) : null}
-      <FormField
-        label="Age"
-        type="number"
-        {...ageProps}
-        placeholder="Please Enter your age"
-      />
-      {formik.touched.age && formik.errors.age ? (
-        <div>{formik.errors.age}</div>
-      ) : null}
+      {formik.touched.userName && formik.errors.userName ? 
+        <div>{formik.errors.userName}</div>
+       : null}
       <FormField
         label="Email"
         type="email"
-        placeholder="Please Enter your email"
         {...emailProps}
+        placeholder="Please Enter your email"
       />
-      {formik.touched.email && formik.errors.email ? (
+      {formik.touched.email && formik.errors.email ? 
+        <div>{formik.errors.email}</div>
+      : null}
+      <FormField
+        label="Password"
+        type= "text"
+        placeholder="Please enter a password"
+     
+      />
+      {formik.touched.password && formik.errors.password ? (
         <div>{formik.errors.email}</div>
       ) : null}
       <FormField
-        label="Password"
-        type="password"
-        placeholder="Please Enter your password"
-        {...passwordProps}
+        label="Role"
+        type="text"
+        placeholder="Diner or Truck Owner"
+      
       />
       {formik.touched.password && formik.errors.password ? (
         <div>{formik.errors.password}</div>
@@ -110,5 +107,5 @@ function Form({ onSubmit }) {
     </form>
   );
 }
-
+   
 export default Form;
