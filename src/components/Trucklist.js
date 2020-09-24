@@ -35,7 +35,6 @@ const SubText = styled.div`
 const Trucklist = ({getData, trucks, error}) => {
 
    useEffect(() => {
-      axiosWithAuth()
      getData();
   }, [getData]);
 
@@ -46,9 +45,9 @@ const Trucklist = ({getData, trucks, error}) => {
           <div>{error}</div>
         ) : (trucks.map((truck) => {
           return <Main key={truck.id}>
-              <Header>{truck.truckName}</Header>
-              <SubText>{truck.foodType}</SubText>
+              <Header>{truck.name}</Header>
               <SubText>{truck.location}</SubText>
+              <SubText>{truck.vendor_id}</SubText>
               </Main>
         }))
         }

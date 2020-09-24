@@ -10,11 +10,11 @@ export const DELETE_TRUCK = "DELETE_TRUCK";
 
 export const getData = () => dispatch => {
     dispatch({ type: FETCH_DATA });
-     axios
-      .get("https://bw-foodtruck-backend.herokuapp.com/api/trucks")
+     axiosWithAuth()
+      .get("/api/trucks")
       .then(res => {
         console.log("rd: getData, actions", res.data);
-        dispatch({ type: UPDATE_TRUCKS, payload: res.data });
+        dispatch({ type: UPDATE_TRUCKS, payload: res.data.data });
       })
       .catch(err => {
         dispatch({ type: SET_ERROR, payload: "error fetching data from api", err });
