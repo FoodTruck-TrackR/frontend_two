@@ -43,133 +43,136 @@ const FormGroup = styled.div`
   margin-top: 10%;
 `;
 
-// const Login = () => {
-
-//   const [ credentials, setCredentials ] = useState({
-//     username: "",
-//     password: ""
-//   });
-
-//   const [ isLoading, setIsLoading ] = useState(false);
-
-//   const loading = () => {
-//     setIsLoading(true);
-//   }
-
-//   const handleChange = e => {
-//     setCredentials({
-//         ...credentials,
-//         [e.target.name]: e.target.value
-//       });
-//   };
-
-//   const login = e => {
-//     e.preventDefault();
-//     axiosWithAuth()
-//       .post("/api/auth/login", credentials)
-//       .then(res => {
-//         localStorage.setItem("authorization", res.data.token);
-//         setIsLoading(false);
-//       })
-//       .catch(err => {
-//         localStorage.removeItem("authorization");
-//         console.log("invalid login: ", err);
-//         setIsLoading(false)
-//       });
-//   };
-
-//   return (
-//     <FormGroup>
-//       {isLoading && (
-//           <div>
-//             <Loader type="Puff" color="#204963" height={60} width={60} />
-//             <p>Logging you in now...</p>
-//           </div>
-//         )}
-//       <h1>Welcome to Food Truck Tracker</h1>
-//       <h2>Log In</h2>  
-//       <form onSubmit={login} >
-//         <Input
-//           type="text"
-//           name="username"
-//           value={credentials.username}
-//           placeholder="username"
-//           onChange={handleChange}
-//         />
-//         <Input
-//           type="password"
-//           name="password"
-//           placeholder="password"
-//           value={credentials.password}
-//           onChange={handleChange}
-//         />
-        
-//           <Button onClick={loading}>Log in</Button>
-        
-//       </form>
-//     </FormGroup>
-//   )
-// };
-
-// export default Login;
-
-
 const Login = () => {
-  const [user, setUser] = useState({
-    credentials: {
-      username: "",
-      password: "",
-    },
+
+  const [ credentials, setCredentials ] = useState({
+    username: "",
+    password: ""
   });
 
   const history = useHistory();
 
-  const handleChange = (e) => {
-    setUser({
-      credentials: {
-        ...user.credentials,
-        [e.target.name]: e.target.value,
-      },
-    });
+  const [ isLoading, setIsLoading ] = useState(false);
+
+  const loading = () => {
+    setIsLoading(true);
+  }
+
+  const handleChange = e => {
+    setCredentials({
+        ...credentials,
+        [e.target.name]: e.target.value
+      });
   };
 
-  const login = (e) => {
+  const login = e => {
     e.preventDefault();
     axiosWithAuth()
-      .post("/api/auth/login", user.credentials)
-      .then((res) => {
-        console.log(res);
+      .post("/api/auth/login", credentials)
+      .then(res => {
         window.localStorage.setItem("token", res.data.token);
-        history.push("/trucklist");
+        setIsLoading(false);
+        history.push("/trucklist")
       })
-      .catch((err) => console.log(err));
+      .catch(err => {
+        window.localStorage.removeItem("token");
+        console.log("invalid login: ", err);
+        setIsLoading(false)
+      });
   };
 
   return (
     <FormGroup>
-       <h1>Welcome to Food Truck Tracker</h1>
-       <h2>Log In</h2> 
-    <div className="formlog">
-      <form onSubmit={login}>
-        <label>Username:</label>
+      {/* {isLoading && (
+          <div>
+            <Loader type="Puff" color="#204963" height={60} width={60} />
+            <p>Logging you in now...</p>
+          </div>
+        )} */}
+      <h1>Welcome to Food Truck Tracker</h1>
+      <h2>Log In</h2>  
+      <form onSubmit={login} >
         <Input
           type="text"
           name="username"
-          value={user.credentials.username}
+          value={credentials.username}
+          placeholder="username"
           onChange={handleChange}
         />
-        <label>Password:</label>
         <Input
           type="password"
           name="password"
-          value={user.credentials.password}
+          placeholder="password"
+          value={credentials.password}
           onChange={handleChange}
         />
-        <Button type="submit">Log in</Button>
+        
+          <Button type="submit">Log in</Button>
+        
       </form>
-    </div>
     </FormGroup>
-  );
+  )
 };
 
 export default Login;
+
+
+// const Login = () => {
+//   const [user, setUser] = useState({
+//     credentials: {
+//       username: "",
+//       password: "",
+//     },
+//   });
+
+//   const history = useHistory();
+
+//   const handleChange = (e) => {
+//     setUser({
+//       credentials: {
+//         ...user.credentials,
+//         [e.target.name]: e.target.value,
+//       },
+//     });
+//   };
+
+//   const login = (e) => {
+//     e.preventDefault();
+//     axiosWithAuth()
+//       .post("/api/auth/login", user.credentials)
+//       .then((res) => {
+//         console.log(res);
+//         window.localStorage.setItem("token", res.data.token);
+//         history.push("/trucklist");
+//       })
+//       .catch((err) => console.log(err));
+//   };
+
+//   return (
+//     <FormGroup>
+//        <h1>Welcome to Food Truck Tracker</h1>
+//        <h2>Log In</h2> 
+//     <div className="formlog">
+//       <form onSubmit={login}>
+//         <label>Username:</label>
+//         <Input
+//           type="text"
+//           name="username"
+//           value={user.credentials.username}
+//           onChange={handleChange}
+//         />
+//         <label>Password:</label>
+//         <Input
+//           type="password"
+//           name="password"
+//           value={user.credentials.password}
+//           onChange={handleChange}
+//         />
+//         <Button type="submit">Log in</Button>
+//       </form>
+//     </div>
+//     </FormGroup>
+//   );
+// };
+
+// export default Login;

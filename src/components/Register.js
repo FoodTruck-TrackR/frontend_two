@@ -74,7 +74,7 @@ const Register = () => {
   const register = e => {
     e.preventDefault();
     axios
-      .post("https://bw-foodtruck-backend.herokuapp.com/api/auth/register", credentials)
+      .post("/api/auth/register", credentials)
       .then(res => {
           console.log(res);
           setIsLoading(false);
@@ -87,12 +87,12 @@ const Register = () => {
 
   return (
     <FormGroup>
-      {isLoading && (
+      {/* {isLoading && (
           <div>
             <Loader type="Puff" color="#204963" height={60} width={60} />
             <p>Registering you now...</p>
           </div>
-        )}
+        )} */}
       <h1>Sign up as a diner or vendor</h1>  
       <form onSubmit={register} >
         <Input
@@ -113,7 +113,7 @@ const Register = () => {
             <option defaultValue="Diner">Diner</option>
             <option value="Vendor">Vendor</option>
         </Select>
-        <Button onClick={loading}>Sign Up</Button>
+        <Button type="submit">Sign Up</Button>
       </form>
     </FormGroup>
   )
