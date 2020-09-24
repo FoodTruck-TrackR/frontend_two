@@ -35,7 +35,7 @@ export const getData = () => dispatch => {
 
   export const postData = (item) => dispatch => {
     axiosWithAuth()
-      .post("/api/users/:id", item)
+      .post("/api/vendors/:id", item)
       .then(res => {
         console.log("rd: postData, actions", res.data)
         dispatch({type: ADD_TRUCK, payload: res.data });
@@ -58,7 +58,7 @@ export const getData = () => dispatch => {
 
   export const delTruck = (item) => dispatch => {
     axiosWithAuth()
-      .delete(`/api/trucks/remove/${item.id}`)
+      .delete(`/api/vendors/:id/:truckId/itemId${item.id}`)
       .then(res => {
         console.log("rd: delTruck: actions, ", res.data);
         dispatch({ type: DELETE_TRUCK, payload: res.data })   

@@ -67,6 +67,7 @@ const AddTruck = ({ postData }) => {
   return (
       <div>
         <FormGroup>
+          <form>
           <Input
             type="text"
             name="truckName"
@@ -89,6 +90,7 @@ const AddTruck = ({ postData }) => {
             placeholder="Current location"
           />
           <Button onClick={handleAddTruck}>Add Truck</Button>
+          </form>
         </FormGroup>
       </div>
   )
@@ -100,7 +102,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  { postData }
-)(AddTruck);
+export default connect(mapStateToProps,{ postData })(AddTruck);

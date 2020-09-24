@@ -40,8 +40,8 @@ function App() {
         <main style={{ marginTop: "98px" }}>
         <Route exact path="/" component={Login} />  
         <ProtectedRoute path="/truckslist" component={Trucklist} />
-        <ProtectedRoute path="/addtrucks" component={AddTruck} />
-        <ProtectedRoute path="/mytruck" component={MyTrucks} />
+        <ProtectedRoute path="/addtruck" component={AddTruck} />
+        <ProtectedRoute path="/mytrucks" component={MyTrucks} />
         <Route 
           path="/api/users/:id"
           render={props => (
