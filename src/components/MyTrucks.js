@@ -126,7 +126,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  { getMyTrucks, delTruck }
-)(MyTrucks);
+export default connect(mapStateToProps,{ getMyTrucks, delTruck })(MyTrucks);

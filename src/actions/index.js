@@ -10,8 +10,8 @@ export const DELETE_TRUCK = "DELETE_TRUCK";
 
 export const getData = () => dispatch => {
     dispatch({ type: FETCH_DATA });
-    axiosWithAuth
-      .get("/api/trucks")
+     axios
+      .get("https://bw-foodtruck-backend.herokuapp.com/api/trucks")
       .then(res => {
         console.log("rd: getData, actions", res.data);
         dispatch({ type: UPDATE_TRUCKS, payload: res.data });
@@ -35,7 +35,7 @@ export const getData = () => dispatch => {
 
   export const postData = (item) => dispatch => {
     axiosWithAuth()
-      .post("/api/vendors/:id", item)
+      .post("/api/users/:id", item)
       .then(res => {
         console.log("rd: postData, actions", res.data)
         dispatch({type: ADD_TRUCK, payload: res.data });
