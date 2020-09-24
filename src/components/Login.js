@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { useHistory } from "react-router-dom";
+import * as yup from "yup";
 import Loader from "react-loader-spinner";
 import styled from 'styled-components';
 
@@ -43,14 +44,41 @@ const FormGroup = styled.div`
   margin-top: 10%;
 `;
 
+const Select = styled.select`
+height: 30px;
+font-size: 14px;
+width: 100%;
+color: black;
+background-color: white;
+margin-top: 10%;
+`;
+
+const formSchema = yup.object().shape({
+  name: yup.string().required("Name is a required field."),
+  password: yup
+  .string()
+  .required("Must include a password."),
+ role: yup
+ .string()
+ .required("Must select either")
+});
+
 const Login = () => {
 
   const [ credentials, setCredentials ] = useState({
     username: "",
-    password: ""
+    password: "",
+    role: ""
   });
 
   const history = useHistory();
+
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+    useEffect(()=> {
+        formSchema.isValid(credentials).then(valid=>{
+            setButtonDisabled(!valid);
+        });
+    }, [credentials]);
 
   const [ isLoading, setIsLoading ] = useState(false);
 
@@ -106,8 +134,12 @@ const Login = () => {
           value={credentials.password}
           onChange={handleChange}
         />
+        <Select name="role" value={credentials.role} onChange={handleChange}>
+            <option defaultValue="Diner">diner</option>
+            <option value="Vendor">vendor</option>
+        </Select>
         
-          <Button type="submit">Log in</Button>
+          <Button type="submit" disabled={buttonDisabled} >Log in</Button>
         
       </form>
     </FormGroup>

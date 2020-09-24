@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import * as yup from 'yup';
 import Loader from "react-loader-spinner";
 import styled from "styled-components";
 
@@ -50,13 +51,35 @@ background-color: white;
 margin-top: 10%;
 `;
 
+const formSchema = yup.object().shape({
+  name: yup.string().required("Name is a required field."),
+  email: yup
+      .string()
+      .email("Must be a valid e-mail address.")
+      .required("Must include an e-mail address."),
+  password: yup
+  .string()
+  .required("Must include a password."),
+ role: yup
+ .string()
+ .required("Must select either")
+});
+
 const Register = () => {
 
   const [ credentials, setCredentials ] = useState({
     username: "",
+    email: "",
     password: "", 
     role: ""
   });
+
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+    useEffect(()=> {
+        formSchema.isValid(credentials).then(valid=>{
+            setButtonDisabled(!valid);
+        });
+    }, [credentials]);
 
   const [ isLoading, setIsLoading ] = useState(false);
 
@@ -102,6 +125,14 @@ const Register = () => {
           placeholder="username"
           onChange={handleChange}
         />
+            <Input
+                type="email"
+                name="email"
+                id="email"
+                value={credentials.email}
+                placeholder="email"
+                onChange={handleChange}
+                />
         <Input
           type="password"
           name="password"
@@ -110,10 +141,10 @@ const Register = () => {
           onChange={handleChange}
         />
         <Select name="role" value={credentials.role} onChange={handleChange}>
-            <option defaultValue="Diner">Diner</option>
-            <option value="Vendor">Vendor</option>
+            <option defaultValue="Diner">diner</option>
+            <option value="Vendor">vendor</option>
         </Select>
-        <Button type="submit">Sign Up</Button>
+        <Button type="submit" disabled={buttonDisabled}>Sign Up</Button>
       </form>
     </FormGroup>
   )

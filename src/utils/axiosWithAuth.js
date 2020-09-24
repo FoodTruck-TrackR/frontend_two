@@ -7,6 +7,6 @@ export const axiosWithAuth = () => {
     headers: {
       authorization: token
     },
-    basrURL: "https://bw-foodtruck-backend.herokuapp.com"
+    baseURL: "https://bw-foodtruck-backend.herokuapp.com"
   });
 };
