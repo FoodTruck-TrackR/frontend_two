@@ -23,7 +23,7 @@ export const getData = () => dispatch => {
 
   export const getMyTrucks = () => dispatch => {
     axiosWithAuth()
-      .get("/api/trucks/mytrucks")
+      .get("/api/trucks/:truckId")
       .then(res => {
         console.log("rd: getMyTrucks, actions", res.data);
         dispatch({ type: UPDATE_TRUCKS, payload: res.data });
@@ -35,7 +35,7 @@ export const getData = () => dispatch => {
 
   export const postData = (item) => dispatch => {
     axiosWithAuth()
-      .post("/api/trucks/add", item)
+      .post("/api/users/:id", item)
       .then(res => {
         console.log("rd: postData, actions", res.data)
         dispatch({type: ADD_TRUCK, payload: res.data });
@@ -47,7 +47,7 @@ export const getData = () => dispatch => {
 
   export const putData = (item) => dispatch => {
     axiosWithAuth()
-      .put(`/api/trucks/update/${item.id}`, item)
+      .put(`/api/users/:id${item.id}`, item)
       .then(res => {
         console.log("rd: putData, actions", res.data);
       })
