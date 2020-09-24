@@ -6,7 +6,7 @@ const ProtectedRoute = ({ component: Component, ...props }) => {
     <Route
       {...props}
       render={() => {
-        if (localStorage.getItem("authorization")) {
+        if (localStorage.getItem("token")) {
           return <Component />;
         } else {
           return <Redirect to="/" />;

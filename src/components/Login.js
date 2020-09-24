@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { useHistory } from "react-router-dom";
-import * as yup from "yup";
-import axios from 'axios';
 import Loader from "react-loader-spinner";
 import styled from 'styled-components';
-
 const FormGroup = styled.div`
 	width: 100%;
 	max-width: 350px;
@@ -15,7 +12,6 @@ const FormGroup = styled.div`
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
   `;
-
   const Button = styled.button`
   width: 100%;
   cursor: pointer;
@@ -31,7 +27,6 @@ const FormGroup = styled.div`
     background-color: #006dcc;
   }
   `;
-
   const Input = styled.input`
 	box-sizing: border-box;
 	font-size: 14px;
@@ -44,71 +39,38 @@ const FormGroup = styled.div`
   transition: all 200ms;
   margin-top: 10%;
 `;
-
-const Select = styled.select`
-height: 30px;
-font-size: 14px;
-width: 100%;
-color: black;
-background-color: white;
-margin-top: 10%;
-`;
-
-// const formSchema = yup.object().shape({
-//   name: yup.string().required("Name is a required field."),
-//   password: yup
-//   .string()
-//   .required("Must include a password."),
-//  role: yup
-//  .string()
-//  .required("Must select either")
-// });
-
 const Login = () => {
-
   const [ credentials, setCredentials ] = useState({
     username: "",
     password: "",
     role: ""
   });
-
-  // const history = useHistory();
-
-  // const [buttonDisabled, setButtonDisabled] = useState(true);
-  //   useEffect(()=> {
-  //       formSchema.isValid(credentials).then(valid=>{
-  //           setButtonDisabled(!valid);
-  //       });
-  //   }, [credentials]);
-
-  const [ isLoading, setIsLoading ] = useState(false);
-
-  const loading = () => {
-    setIsLoading(true);
-  }
-
+  const history = useHistory();
+  // const [ isLoading, setIsLoading ] = useState(false);
+  // const loading = () => {
+  //   setIsLoading(true);
+  // }
   const handleChange = e => {
     setCredentials({
         ...credentials,
         [e.target.name]: e.target.value
       });
   };
-
   const login = e => {
     e.preventDefault();
     axiosWithAuth()
       .post("/api/auth/login", credentials)
       .then(res => {
         localStorage.setItem("token", res.data.token);
-        setIsLoading(false);
+        // setIsLoading(false);
+        history.push("/trucklist")
       })
       .catch(err => {
         localStorage.removeItem("token");
         console.log("invalid login: ", err);
-        setIsLoading(false)
+        // setIsLoading(false)
       });
   };
-
   return (
     <FormGroup>
       {/* {isLoading && (
@@ -128,83 +90,22 @@ const Login = () => {
           onChange={handleChange}
         />
         <Input
-          type="password"
+          type="text"
           name="password"
           placeholder="password"
           value={credentials.password}
           onChange={handleChange}
         />
-        <Select name="role" value={credentials.role} onChange={handleChange}>
-            <option defaultValue="Diner">diner</option>
-            <option value="Vendor">vendor</option>
-        </Select>
-        
-          <Button type="submit" >Log in</Button>
-        
+        <Input
+          type="text"
+          name="role"
+          placeholder="role"
+          value={credentials.role}
+          onChange={handleChange}
+        />
+          <Button type="submit">Log in</Button>
       </form>
     </FormGroup>
   )
 };
-
 export default Login;
-
-
-// const Login = () => {
-//   const [user, setUser] = useState({
-//     credentials: {
-//       username: "",
-//       password: "",
-//     },
-//   });
-
-//   const history = useHistory();
-
-//   const handleChange = (e) => {
-//     setUser({
-//       credentials: {
-//         ...user.credentials,
-//         [e.target.name]: e.target.value,
-//       },
-//     });
-//   };
-
-//   const login = (e) => {
-//     e.preventDefault();
-//     axiosWithAuth()
-//       .post("/api/auth/login", user.credentials)
-//       .then((res) => {
-//         console.log(res);
-//         window.localStorage.setItem("token", res.data.token);
-//         history.push("/trucklist");
-//       })
-//       .catch((err) => console.log(err));
-//   };
-
-//   return (
-//     <FormGroup>
-//        <h1>Welcome to Food Truck Tracker</h1>
-//        <h2>Log In</h2> 
-//     <div className="formlog">
-//       <form onSubmit={login}>
-//         <label>Username:</label>
-//         <Input
-//           type="text"
-//           name="username"
-//           value={user.credentials.username}
-//           onChange={handleChange}
-//         />
-//         <label>Password:</label>
-//         <Input
-//           type="password"
-//           name="password"
-//           value={user.credentials.password}
-//           onChange={handleChange}
-//         />
-//         <Button type="submit">Log in</Button>
-//       </form>
-//     </div>
-//     </FormGroup>
-//   );
-// };
-
-// export default Login;

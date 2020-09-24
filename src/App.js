@@ -35,13 +35,13 @@ function App() {
 
   return (
     <Provider store={store}>
-      <Switch>
+      
       <div className="App">
         <main style={{ marginTop: "98px" }}>
         <Route exact path="/" component={Login} />  
-        <ProtectedRoute path="/trucks" component={Trucklist} />
-        <ProtectedRoute path="/addtruck" component={AddTruck} />
-        <ProtectedRoute path="/mytrucks" component={MyTrucks} />
+        <ProtectedRoute path="/truckslist" component={Trucklist} />
+        <ProtectedRoute path="/addtrucks" component={AddTruck} />
+        <ProtectedRoute path="/mytruck" component={MyTrucks} />
         <Route 
           path="/api/users/:id"
           render={props => (
@@ -54,7 +54,7 @@ function App() {
         <Backdrop drawerClose={drawerCloser} />  
         </main>
       </div>
-      </Switch>
+      
     </Provider>
   );
 }

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from "react-redux";
 import styled from 'styled-components';
-import Loader from "react-loader-spinner";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { getData } from '../actions';
 
@@ -36,7 +35,7 @@ const SubText = styled.div`
 const Trucklist = ({getData, trucks, error}) => {
 
    useEffect(() => {
-     axiosWithAuth()
+      axiosWithAuth()
      getData();
   }, [getData]);
 
