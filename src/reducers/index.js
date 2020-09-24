@@ -3,21 +3,9 @@ import { FETCH_DATA, UPDATE_TRUCKS, ADD_TRUCK, SET_ERROR, DELETE_TRUCK } from ".
 export const initialState = {
     trucks: [{
       id: 0,
-      truckName:"",
-      imageOfTruck: "",
-      foodType: "",
+      name:"",
       location: "",
-      departureTime: "",
-      dinerRatings: [],
-      dinerRatingAvg: 0,
-      menu: {
-          itemName: "",
-          itemDescription: "",
-          itemPhotos: [],
-          itemPrice: 0,
-          dinerRatings: [],
-          dinerRatingAvg: 0
-      }
+      vendor_id: ""
     }],
     error: ""
   }
@@ -28,7 +16,7 @@ export const initialState = {
         case FETCH_DATA: 
           return {
             ...state,
-            trucks: []
+            trucks: [...state.trucks]
           }
         case UPDATE_TRUCKS:
           return {

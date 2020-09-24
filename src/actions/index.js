@@ -14,7 +14,7 @@ export const getData = () => dispatch => {
       .get("/api/trucks")
       .then(res => {
         console.log("rd: getData, actions", res.data);
-        dispatch({ type: UPDATE_TRUCKS, payload: res.data.data });
+        dispatch({ type: FETCH_DATA, payload: res.data.data });
       })
       .catch(err => {
         dispatch({ type: SET_ERROR, payload: "error fetching data from api", err });

@@ -96,8 +96,8 @@ const MyTrucks = props => {
           <div>{props.error}</div>
         ) : (props.trucks.map((truck) => {
           return <Main key={truck.id}>
-            <Header>{truck.truckName}</Header>
-            <SubText>{truck.foodType}</SubText>
+            <Header>{truck.name}</Header>
+            <SubText>{truck.vendor_id}</SubText>
             <SubText>{truck.location}</SubText>
             <BtnContainer>
               <Button onClick={e => {
