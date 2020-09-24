@@ -43,7 +43,7 @@ function App() {
         <ProtectedRoute path="/addtruck" component={AddTruck} />
         <ProtectedRoute path="/mytrucks" component={MyTrucks} />
         <Route 
-          path="/update-truck/:id"
+          path="/api/users/:id"
           render={props => (
             <UpdateTruck {...props} />
           )}

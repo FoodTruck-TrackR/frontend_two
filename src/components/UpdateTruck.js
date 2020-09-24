@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { putData } from '../actions';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 const FormGroup = styled.div`
 	width: 100%;
@@ -72,6 +73,7 @@ const UpdateTruck = props => {
 
   const handleUpdateTruck = e => {
     e.preventDefault();
+    axiosWithAuth()
     props.putData(item);
   }
 

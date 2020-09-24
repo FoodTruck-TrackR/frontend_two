@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import styled from 'styled-components';
 import { connect } from "react-redux";
 import { getMyTrucks, delTruck } from '../actions';
+import { axiosWithAuth } from "../utils/axiosWithAuth"
 
 const Main = styled.div`
   background: white;
@@ -79,8 +80,10 @@ const MyTrucks = props => {
   }
 
   const updateTruck = item => {
-    push(`/update-truck/${item.id}`)
+    axiosWithAuth()
+    push(`/api/users/:id/${item.id}`)
   }
+  // /update-truck/${item.id}
 
    useEffect(() => {
      props.getMyTrucks();

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from "react-redux";
 import styled from 'styled-components';
 import Loader from "react-loader-spinner";
-
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { getData } from '../actions';
 
 const Main = styled.div`
@@ -36,6 +36,7 @@ const SubText = styled.div`
 const Trucklist = ({getData, trucks, error}) => {
 
    useEffect(() => {
+     axiosWithAuth()
      getData();
   }, [getData]);
 
@@ -63,7 +64,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  { getData }
-)(Trucklist);
+export default connect(mapStateToProps,{ getData })(Trucklist);

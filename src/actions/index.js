@@ -10,7 +10,7 @@ export const DELETE_TRUCK = "DELETE_TRUCK";
 
 export const getData = () => dispatch => {
     dispatch({ type: FETCH_DATA });
-    axios
+    axiosWithAuth
       .get("/api/trucks")
       .then(res => {
         console.log("rd: getData, actions", res.data);

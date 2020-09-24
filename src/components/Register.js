@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import {axiosWithAuth} from "../utils/axiosWithAuth";
 import * as yup from 'yup';
 import Loader from "react-loader-spinner";
 import styled from "styled-components";
@@ -51,19 +51,19 @@ background-color: white;
 margin-top: 10%;
 `;
 
-const formSchema = yup.object().shape({
-  name: yup.string().required("Name is a required field."),
-  email: yup
-      .string()
-      .email("Must be a valid e-mail address.")
-      .required("Must include an e-mail address."),
-  password: yup
-  .string()
-  .required("Must include a password."),
- role: yup
- .string()
- .required("Must select either")
-});
+// const formSchema = yup.object().shape({
+//   name: yup.string().required("Name is a required field."),
+//   email: yup
+//       .string()
+//       .email("Must be a valid e-mail address.")
+//       .required("Must include an e-mail address."),
+//   password: yup
+//   .string()
+//   .required("Must include a password."),
+//  role: yup
+//  .string()
+//  .required("Must select either")
+// });
 
 const Register = () => {
 
@@ -71,15 +71,15 @@ const Register = () => {
     username: "",
     email: "",
     password: "", 
-    role: ""
+    role: "diner"
   });
 
-  const [buttonDisabled, setButtonDisabled] = useState(true);
-    useEffect(()=> {
-        formSchema.isValid(credentials).then(valid=>{
-            setButtonDisabled(!valid);
-        });
-    }, [credentials]);
+  // const [buttonDisabled, setButtonDisabled] = useState(true);
+  //   useEffect(()=> {
+  //       formSchema.isValid(credentials).then(valid=>{
+  //           setButtonDisabled(!valid);
+  //       });
+  //   }, [credentials]);
 
   const [ isLoading, setIsLoading ] = useState(false);
 
@@ -96,7 +96,7 @@ const Register = () => {
 
   const register = e => {
     e.preventDefault();
-    axios
+    axiosWithAuth()
       .post("/api/auth/register", credentials)
       .then(res => {
           console.log(res);
@@ -117,6 +117,7 @@ const Register = () => {
           </div>
         )} */}
       <h1>Sign up as a diner or vendor</h1>  
+      <h2>Sign Up</h2>
       <form onSubmit={register} >
         <Input
           type="text"
@@ -144,7 +145,8 @@ const Register = () => {
             <option defaultValue="Diner">diner</option>
             <option value="Vendor">vendor</option>
         </Select>
-        <Button type="submit" disabled={buttonDisabled}>Sign Up</Button>
+        <Button type="submit" >Sign Up</Button>
+        {/* disabled={buttonDisabled} */}
       </form>
     </FormGroup>
   )

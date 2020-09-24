@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { useHistory } from "react-router-dom";
 import * as yup from "yup";
+import axios from 'axios';
 import Loader from "react-loader-spinner";
 import styled from 'styled-components';
 
@@ -53,15 +54,15 @@ background-color: white;
 margin-top: 10%;
 `;
 
-const formSchema = yup.object().shape({
-  name: yup.string().required("Name is a required field."),
-  password: yup
-  .string()
-  .required("Must include a password."),
- role: yup
- .string()
- .required("Must select either")
-});
+// const formSchema = yup.object().shape({
+//   name: yup.string().required("Name is a required field."),
+//   password: yup
+//   .string()
+//   .required("Must include a password."),
+//  role: yup
+//  .string()
+//  .required("Must select either")
+// });
 
 const Login = () => {
 
@@ -71,14 +72,14 @@ const Login = () => {
     role: ""
   });
 
-  const history = useHistory();
+  // const history = useHistory();
 
-  const [buttonDisabled, setButtonDisabled] = useState(true);
-    useEffect(()=> {
-        formSchema.isValid(credentials).then(valid=>{
-            setButtonDisabled(!valid);
-        });
-    }, [credentials]);
+  // const [buttonDisabled, setButtonDisabled] = useState(true);
+  //   useEffect(()=> {
+  //       formSchema.isValid(credentials).then(valid=>{
+  //           setButtonDisabled(!valid);
+  //       });
+  //   }, [credentials]);
 
   const [ isLoading, setIsLoading ] = useState(false);
 
@@ -98,12 +99,11 @@ const Login = () => {
     axiosWithAuth()
       .post("/api/auth/login", credentials)
       .then(res => {
-        window.localStorage.setItem("token", res.data.token);
+        localStorage.setItem("token", res.data.token);
         setIsLoading(false);
-        history.push("/trucklist")
       })
       .catch(err => {
-        window.localStorage.removeItem("token");
+        localStorage.removeItem("token");
         console.log("invalid login: ", err);
         setIsLoading(false)
       });
@@ -139,7 +139,7 @@ const Login = () => {
             <option value="Vendor">vendor</option>
         </Select>
         
-          <Button type="submit" disabled={buttonDisabled} >Log in</Button>
+          <Button type="submit" >Log in</Button>
         
       </form>
     </FormGroup>

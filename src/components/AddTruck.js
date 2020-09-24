@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { connect } from "react-redux";
 import { postData } from '../actions';
 import styled from "styled-components";
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 const FormGroup = styled.div`
 	width: 100%;
@@ -58,6 +59,7 @@ const AddTruck = ({ postData }) => {
   }
 
   const handleAddTruck = e => {
+    axiosWithAuth()
     e.preventDefault();
     postData(truck);
   }
