@@ -54,6 +54,21 @@ const Button = styled.button`
     background-color: #006dcc;
   }
   `;
+  const Buttonb = styled.button`
+  width: 25%;
+  cursor: pointer;
+	border: none;
+	padding: 15px;
+	font-size: 14px;
+	border-radius: 3px;
+	background-color:  rgba(255, 0, 242, 0.678);
+	color: black;
+  appearance: none;
+  margin-top: 2%;
+  &:hover {
+    background-color: lightpink;
+  }
+  `;
 
   const DeleteButton = styled.button`
   width: 25%;
@@ -83,6 +98,10 @@ const MyTrucks = props => {
     axiosWithAuth()
     push(`/api/users/:id/${item.id}`)
   }
+  const addTruck = item => {
+    axiosWithAuth()
+    push(`/api/users/:id/${item.id}`)
+  }
   // /update-truck/${item.id}
 
    useEffect(() => {
@@ -101,6 +120,12 @@ const MyTrucks = props => {
             <SubText>{truck.vendor_id}</SubText>
             <SubText>{truck.location}</SubText>
             <BtnContainer>
+            <Buttonb onClick={e => {
+                e.stopPropagation();
+                addTruck(truck)}
+              }>
+                  Add to Fav's
+              </Buttonb>
               <Button onClick={e => {
                 e.stopPropagation();
                 updateTruck(truck)}
