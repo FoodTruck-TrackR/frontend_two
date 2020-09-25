@@ -95,6 +95,7 @@ const MyTrucks = props => {
         {props.error ? (
           <div>{props.error}</div>
         ) : (props.trucks.map((truck) => {
+          console.log(props.trucks);
           return <Main key={truck.id}>
             <Header>{truck.name}</Header>
             <SubText>{truck.vendor_id}</SubText>

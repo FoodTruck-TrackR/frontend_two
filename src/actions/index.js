@@ -26,7 +26,7 @@ export const getData = () => dispatch => {
       .get("/api/trucks/:truckId")
       .then(res => {
         console.log("rd: getMyTrucks, actions", res.data);
-        dispatch({ type: UPDATE_TRUCKS, payload: res.data });
+        // dispatch({ type: UPDATE_TRUCKS, payload: res.data });
       })
       .catch(err => {
         dispatch({ type: SET_ERROR, payload: "error fetching MyTrucks from api", err });
@@ -35,13 +35,25 @@ export const getData = () => dispatch => {
 
   export const postData = (item) => dispatch => {
     axiosWithAuth()
-      .post("/api/users/:id", item)
+      .post("", item)
       .then(res => {
         console.log("rd: postData, actions", res.data)
         dispatch({type: ADD_TRUCK, payload: res.data });
       })
       .catch(err => {
         dispatch({ type: SET_ERROR, payload: "error posting data to api", err });
+      })
+  }
+
+  export const postDatafav = (item) => dispatch => {
+    axiosWithAuth()
+      .post("/api/users/:id", item)
+      .then(res => {
+        console.log("rd: postDatafav, actions", res.data)
+        // dispatch({type: ADD_TRUCK, payload: res.data });
+      })
+      .catch(err => {
+        dispatch({ type: SET_ERROR, payload: "error posting datafav to api", err });
       })
   }
 
@@ -58,7 +70,7 @@ export const getData = () => dispatch => {
 
   export const delTruck = (item) => dispatch => {
     axiosWithAuth()
-      .delete(`/api/vendors/:id/:truckId/itemId${item.id}`)
+      .delete(`/api/users/:userId/:favorite_id`)
       .then(res => {
         console.log("rd: delTruck: actions, ", res.data);
         dispatch({ type: DELETE_TRUCK, payload: res.data })   

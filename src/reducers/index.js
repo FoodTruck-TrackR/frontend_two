@@ -2,11 +2,18 @@ import { FETCH_DATA, UPDATE_TRUCKS, ADD_TRUCK, SET_ERROR, DELETE_TRUCK } from ".
 
 export const initialState = {
     trucks: [{
-      id: 0,
-      name:"",
-      location: "",
-      vendor_id: ""
-    }],
+      id: 1,
+      name:"Bobs Burgers",
+      location: "Orlando",
+      vendor_id: "1"
+    },
+    {
+      id: 2,
+      name:"Taco King",
+      location: "Las Vegas",
+      vendor_id: "2"
+    }
+  ],
     error: ""
   }
 

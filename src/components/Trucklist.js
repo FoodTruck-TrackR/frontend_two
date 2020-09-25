@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from "react-redux";
 import styled from 'styled-components';
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-import { getData } from '../actions';
+import { getData, postDatafav } from '../actions';
 
 const Main = styled.div`
   background: white;
@@ -32,6 +32,12 @@ const SubText = styled.div`
   color: gray;
 `;
 
+// const Addtofav = ({postDatafav}) => {
+//   useEffect(() => {
+//     postDatafav();
+//   }, [postDatafav]);
+// }
+
 const Trucklist = ({getData, trucks, error}) => {
 
    useEffect(() => {
@@ -48,6 +54,7 @@ const Trucklist = ({getData, trucks, error}) => {
               <Header>{truck.name}</Header>
               <SubText>{truck.location}</SubText>
               <SubText>{truck.vendor_id}</SubText>
+              {/* <button onClick={Addtofav} >Add to Fav's </button> */}
               </Main>
         }))
         }
